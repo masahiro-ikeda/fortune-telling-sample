@@ -1,0 +1,33 @@
+<html>
+<head>
+<link rel="stylesheet" href="input-form.css">
+<meta charset="UTF-8">
+<title>今日の運勢は？</title>
+</head>
+<body>
+	<h1>今日の運勢を占ってみましょう！</h1>
+	<form action="fortune" method="post">
+		<p>お名前：
+			<input type="text" name="user_name" required>
+		</p>
+		<p>誕生日：
+			<select name="user_birth_month">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select> 月
+			<input type="number" name="user_birth_day" size="2" required min="1" max="31"> 日
+		</p>
+		<br> <input type="submit" value="占っちゃう！">
+	</form>
+</body>
+</html>
