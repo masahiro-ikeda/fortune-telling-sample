@@ -37,16 +37,18 @@ public class Fortune extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int scriptNo = 0;
-		String name = null;
+		request.setCharacterEncoding("UTF-8");
 
-		// ******** 結果表示に利用するための値を用意 ********
-		int birthMonth = 0;
-		int birthDay = 0;
+		// 引数の受け取り
+		String paramName       = request.getParameter("user_name");
+		String paramBirthMonth = request.getParameter("user_birth_month");
+		String paramBirthDay   = request.getParameter("user_birth_day");
 
-		birthMonth = Integer.parseInt(request.getParameter("user_birth_month"));
-		birthDay   = Integer.parseInt(request.getParameter("user_birth_day"));
-		name       = request.getParameter("user_name");
+		// 引数を占い結果判定ロジックで使えるように変換
+		int scriptNo   = 0;
+		String name    = paramName != null ? paramName : "あなた";
+		int birthMonth = paramBirthMonth != null ? Integer.parseInt(paramBirthMonth) : 1;
+		int birthDay   = paramBirthDay != null ? Integer.parseInt(paramBirthDay) : 1;
 
 		/*
 		 * 占い結果No.を取得するための計算式は次の通り
@@ -63,13 +65,10 @@ public class Fortune extends HttpServlet {
 			scriptNo = scriptNo - 20;
 		}
 
-		// ******** 入力がない場合は適当な値をセット ********
+		// 入力がない場合は適当な値をセット
 		if (scriptNo == 0) {
 			Random rand = new Random();
 			scriptNo = rand.nextInt(20) + 1;
-		}
-		if (name == "") {
-			name = "あなた";
 		}
 
 		// ******** 占い結果を表示させるためのHTMLを生成 ********
